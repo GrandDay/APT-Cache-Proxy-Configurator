@@ -4,6 +4,23 @@ Automate APT-Cacher-NG proxy configuration across Proxmox hosts, LXC containers,
 
 ## Quick Start
 
+### Option 1: Interactive Installation (Recommended)
+
+One-liner that prompts for your configuration:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/GrandDay/apt-cache-config/main/install-interactive.sh | bash
+```
+
+This will:
+
+- Prompt for your APT-Cacher-NG server IP and port
+- Ask for SSH configuration preferences
+- Optionally accept an existing SSH public key
+- Download and configure the script automatically
+
+### Option 2: Manual Installation
+
 ```bash
 # 1. Download the script
 curl -o /usr/local/bin/connect-to-apt-cache.sh https://raw.githubusercontent.com/GrandDay/apt-cache-config/main/src/connect-to-apt-cache.sh
@@ -32,26 +49,37 @@ The APT Cache Proxy Configurator is a tool designed to simplify the configuratio
 
 ## Installation
 
-To install the APT Cache Proxy Configurator, you can use the provided `install.sh` script. This script will copy the main script to a system path and set the necessary permissions.
+### Quick Install (Interactive - Recommended)
 
-### Installation Steps
+One-liner that prompts for your configuration:
 
-1. Clone the repository or download the files.
-2. Navigate to the project directory.
-3. Run the installation script:
+```bash
+curl -fsSL https://raw.githubusercontent.com/GrandDay/apt-cache-config/main/install-interactive.sh | bash
+```
 
-   ```bash
-   ./install.sh
-   ```
+This interactive installer will ask for your APT-Cacher-NG server details and SSH preferences.
 
-Alternatively, you can download the main script directly using `curl`:
+### Manual Install
+
+For manual configuration:
 
 ```bash
 curl -o /usr/local/bin/connect-to-apt-cache.sh https://raw.githubusercontent.com/GrandDay/apt-cache-config/main/src/connect-to-apt-cache.sh
 chmod +x /usr/local/bin/connect-to-apt-cache.sh
+nano /usr/local/bin/connect-to-apt-cache.sh  # Edit configuration
 ```
 
-**Note:** Before using the script, you **must** customize the configuration variables at the top of the file. See the [Usage](#usage) section below.
+### Repository Install
+
+Clone and install from source:
+
+```bash
+git clone https://github.com/GrandDay/apt-cache-config.git
+cd apt-cache-config
+./install.sh
+```
+
+**Note:** Manual and repository installs require editing the configuration. See the [Configuration](#configuration) section below.
 
 ## Configuration
 

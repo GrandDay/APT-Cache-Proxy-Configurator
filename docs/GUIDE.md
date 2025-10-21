@@ -18,14 +18,61 @@ The APT Cache Proxy Configurator is a tool designed to help users configure thei
 
 ## Installation
 
-To install the APT Cache Proxy Configurator, you can use the following command to download the script directly to your system:
+You have two options for installing the APT Cache Proxy Configurator:
+
+### Option 1: Interactive Installation (Recommended)
+
+Run this one-liner for a guided setup:
 
 ```bash
-curl -o /usr/local/bin/connect-to-apt-cache.sh https://raw.githubusercontent.com/yourusername/apt-cache-proxy-configurator/main/src/connect-to-apt-cache.sh
-chmod +x /usr/local/bin/connect-to-apt-cache.sh
+curl -fsSL https://raw.githubusercontent.com/GrandDay/apt-cache-config/main/install-interactive.sh | bash
 ```
 
-Make sure to replace `yourusername` with your actual GitHub username or the appropriate path to the raw script.
+The interactive installer will:
+
+- Prompt you for your APT-Cacher-NG server IP and port
+- Ask for your SSH configuration preferences
+- Optionally accept an existing SSH public key
+- Download and configure the script automatically
+- Confirm all settings before installation
+
+**Example Session:**
+
+```text
+==========================================
+APT Cache Proxy Configurator - Installer
+==========================================
+
+Enter APT-Cacher-NG server IP (default: 10.1.50.183): 192.168.1.100
+Enter APT-Cacher-NG server port (default: 3142): 3142
+Enter SSH user for VM access (default: root): root
+Enter SSH key path (default: $HOME/.ssh/id_rsa): /root/.ssh/id_rsa
+Do you have an existing SSH public key to use? (y/n): n
+
+Configuration:
+  APT Proxy: http://192.168.1.100:3142
+  SSH User: root
+  SSH Key: /root/.ssh/id_rsa
+  Custom SSH Key: None (will generate if needed)
+
+Proceed with installation? (y/n): y
+```
+
+### Option 2: Manual Installation
+
+If you prefer to configure manually:
+
+```bash
+# 1. Download the script
+curl -o /usr/local/bin/connect-to-apt-cache.sh https://raw.githubusercontent.com/GrandDay/apt-cache-config/main/src/connect-to-apt-cache.sh
+chmod +x /usr/local/bin/connect-to-apt-cache.sh
+
+# 2. Edit configuration
+nano /usr/local/bin/connect-to-apt-cache.sh
+
+# 3. Verify installation
+connect-to-apt-cache.sh
+```
 
 ## Configuration
 
