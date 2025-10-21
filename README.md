@@ -12,6 +12,16 @@ One-liner that prompts for your configuration:
 curl -fsSL https://raw.githubusercontent.com/GrandDay/apt-cache-config/main/install-interactive.sh | bash
 ```
 
+**Note:** If you encounter errors due to CDN caching, use one of these alternatives:
+
+```bash
+# Method 1: Process substitution
+bash <(curl -fsSL https://raw.githubusercontent.com/GrandDay/apt-cache-config/main/install-interactive.sh)
+
+# Method 2: Download first, then run
+curl -fsSL https://raw.githubusercontent.com/GrandDay/apt-cache-config/main/install-interactive.sh -o /tmp/install.sh && bash /tmp/install.sh
+```
+
 This will:
 
 - Prompt for your APT-Cacher-NG server IP and port
