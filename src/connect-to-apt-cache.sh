@@ -1,4 +1,3 @@
-cat > /apt-cache-proxy-configurator/apt-cache-proxy-configurator/src/connect-to-apt-cache.sh << 'EOF'
 #!/bin/bash
 
 #########################
@@ -470,5 +469,3 @@ main() {
 }
 
 main "$@"
-EOF
-chmod +x /apt-cache-proxy-configurator/apt-cache-proxy-configurator/src/connect-to-apt-cache.sh
