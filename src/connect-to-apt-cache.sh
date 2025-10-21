@@ -4,7 +4,7 @@ cat > /apt-cache-proxy-configurator/apt-cache-proxy-configurator/src/connect-to-
 #########################
 # CUSTOMIZE THESE VALUES BEFORE RUNNING
 #########################
-APT_PROXY_SERVER="http://10.1.50.183:3142"    # Your apt-cacher-ng server address
+APT_PROXY_SERVER="http://000.000.000.000:3142"    # Your apt-cacher-ng server address
 SSH_USER="root"                                # SSH user for VM access
 SSH_KEY_PATH="$HOME/.ssh/id_rsa"              # Path to SSH private key
 SSH_PUBLIC_KEY_PATH="$HOME/.ssh/id_rsa.pub"   # Path to SSH public key
@@ -439,7 +439,7 @@ main() {
             echo "===================================="
             echo ""
             echo "BEFORE USING: Edit the configuration at the top of this script:"
-            echo "  - APT_PROXY_SERVER (default: http://10.1.50.183:3142)"
+            echo "  - APT_PROXY_SERVER (default: http://000.000.000.000:3142)"
             echo "  - SSH_USER (default: root)"
             echo "  - SSH_KEY_PATH (default: \$HOME/.ssh/id_rsa)"
             echo ""
@@ -463,7 +463,7 @@ main() {
             echo "  $0 remove local"
             echo ""
             echo "Standalone command (run directly inside VM/LXC/Host):"
-            echo "  echo 'Acquire::http::Proxy \"http://10.1.50.183:3142\";' | sudo tee /etc/apt/apt.conf.d/00aptproxy"
+            echo "  echo 'Acquire::http::Proxy \"http://000.000.000.000:3142\";' | sudo tee /etc/apt/apt.conf.d/00aptproxy"
             exit 1
             ;;
     esac
