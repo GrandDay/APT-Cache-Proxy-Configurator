@@ -28,7 +28,7 @@ To install the APT Cache Proxy Configurator, you can use the provided `install.s
 Alternatively, you can download the main script directly using `curl`:
 
 ```bash
-curl -o /usr/local/bin/connect-to-apt-cache.sh https://raw.githubusercontent.com/GrandDay/apt-cache-proxy-configurator/main/src/connect-to-apt-cache.sh
+curl -o /usr/local/bin/connect-to-apt-cache.sh https://github.com/GrandDay/apt-cache-config/blob/main/src/connect-to-apt-cache.sh
 chmod +x /usr/local/bin/connect-to-apt-cache.sh
 ```
 
