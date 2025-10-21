@@ -1,5 +1,24 @@
 # APT Cache Proxy Configurator
 
+Automate APT-Cacher-NG proxy configuration across Proxmox hosts, LXC containers, and VMs.
+
+## Quick Start
+
+```bash
+# 1. Download the script
+curl -o /usr/local/bin/connect-to-apt-cache.sh https://raw.githubusercontent.com/GrandDay/apt-cache-config/main/src/connect-to-apt-cache.sh
+chmod +x /usr/local/bin/connect-to-apt-cache.sh
+
+# 2. Edit configuration (REQUIRED - set your proxy server IP)
+nano /usr/local/bin/connect-to-apt-cache.sh
+# Change: APT_PROXY_SERVER="http://YOUR_SERVER_IP:3142"
+
+# 3. Configure your system
+connect-to-apt-cache.sh local           # Configure current host
+connect-to-apt-cache.sh lxc-all         # Configure all LXC containers
+connect-to-apt-cache.sh vm 10.1.50.10   # Configure a VM
+```
+
 ## Overview
 
 The APT Cache Proxy Configurator is a tool designed to simplify the configuration of Debian/Ubuntu systems to use an APT-Cacher-NG proxy server. This tool helps in speeding up package downloads and reducing bandwidth usage by caching packages.
@@ -28,8 +47,32 @@ To install the APT Cache Proxy Configurator, you can use the provided `install.s
 Alternatively, you can download the main script directly using `curl`:
 
 ```bash
-curl -o /usr/local/bin/connect-to-apt-cache.sh https://github.com/GrandDay/apt-cache-config/blob/main/src/connect-to-apt-cache.sh
+curl -o /usr/local/bin/connect-to-apt-cache.sh https://raw.githubusercontent.com/GrandDay/apt-cache-config/main/src/connect-to-apt-cache.sh
 chmod +x /usr/local/bin/connect-to-apt-cache.sh
+```
+
+**Note:** Before using the script, you **must** customize the configuration variables at the top of the file. See the [Usage](#usage) section below.
+
+## Configuration
+
+**IMPORTANT:** Before using the script, you must edit `/usr/local/bin/connect-to-apt-cache.sh` and customize the configuration variables at the top:
+
+```bash
+APT_PROXY_SERVER="http://10.1.50.183:3142"    # Change to your apt-cacher-ng server
+SSH_USER="root"                                # Change if using different user
+SSH_KEY_PATH="$HOME/.ssh/id_rsa"              # Path to SSH private key
+SSH_PUBLIC_KEY_PATH="$HOME/.ssh/id_rsa.pub"   # Path to SSH public key
+CUSTOM_SSH_PUBLIC_KEY=""                       # Optional: paste existing SSH public key
+```
+
+### Quick Configuration
+
+```bash
+# Edit the script
+nano /usr/local/bin/connect-to-apt-cache.sh
+
+# Or use sed to update the proxy server
+sed -i 's|http://10.1.50.183:3142|http://YOUR_SERVER_IP:3142|' /usr/local/bin/connect-to-apt-cache.sh
 ```
 
 ## Usage
@@ -80,4 +123,4 @@ Contributions are welcome! Please feel free to submit a pull request or open an 
 
 ## Contact
 
-For any questions or feedback, please reach out to grandday@cue-verse.quest .
+For any questions or feedback, please reach out to <grandday@cue-verse.quest>.t> .
