@@ -21,7 +21,7 @@ read -p "Enter SSH user for VM access (default: root): " SSH_USER
 SSH_USER=${SSH_USER:-root}
 
 read -p "Enter SSH key path (default: \$HOME/.ssh/id_rsa): " SSH_KEY
-SSH_KEY=${SSH_KEY:-\$HOME/.ssh/id_rsa}
+SSH_KEY=${SSH_KEY:-$HOME/.ssh/id_rsa}
 
 read -p "Do you have an existing SSH public key to use? (y/n): " -n 1 -r
 echo
