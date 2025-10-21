@@ -80,4 +80,4 @@ Contributions are welcome! Please feel free to submit a pull request or open an 
 
 ## Contact
 
-For any questions or feedback, please reach out to [your-email@example.com].
+For any questions or feedback, please reach out to grandday@cue-verse.quest .
