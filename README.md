@@ -6,20 +6,34 @@ Automate APT-Cacher-NG proxy configuration across Proxmox hosts, LXC containers,
 
 ### Option 1: Interactive Installation (Recommended)
 
-One-liner that prompts for your configuration:
+**⚠️ Security Note:** Review scripts before piping to bash. Use the 2-step method for production:
+
+**Quick (review first):**
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/GrandDay/apt-cache-config/main/install-interactive.sh | bash
 ```
 
-**Note:** If you encounter errors due to CDN caching, use one of these alternatives:
+**Safer 2-step (recommended for production):**
+
+```bash
+# 1. Download and review
+curl -fsSL https://raw.githubusercontent.com/GrandDay/apt-cache-config/main/install-interactive.sh -o /tmp/install-apt-cache.sh
+less /tmp/install-apt-cache.sh  # Review the script
+
+# 2. Run after review
+bash /tmp/install-apt-cache.sh
+rm /tmp/install-apt-cache.sh
+```
+
+**Alternative methods if CDN cache causes issues:**
 
 ```bash
 # Method 1: Process substitution
 bash <(curl -fsSL https://raw.githubusercontent.com/GrandDay/apt-cache-config/main/install-interactive.sh)
 
-# Method 2: Download first, then run
-curl -fsSL https://raw.githubusercontent.com/GrandDay/apt-cache-config/main/install-interactive.sh -o /tmp/install.sh && bash /tmp/install.sh
+# Method 2: With cache-busting
+curl -fsSL "https://raw.githubusercontent.com/GrandDay/apt-cache-config/main/install-interactive.sh?$(date +%s)" | bash
 ```
 
 This will:
@@ -91,6 +105,35 @@ cd apt-cache-config
 
 **Note:** Manual and repository installs require editing the configuration. See the [Configuration](#configuration) section below.
 
+## How It Works
+
+This tool writes a **single configuration file** on target systems:
+
+```text
+/etc/apt/apt.conf.d/00aptproxy
+```
+
+Containing:
+
+```bash
+Acquire::http::Proxy "http://YOUR_SERVER_IP:3142";
+```
+
+**Why this approach:**
+
+- ✅ **Safe:** Doesn't modify `sources.list` or other user configs
+- ✅ **Idempotent:** Re-running is safe; checks if already configured
+- ✅ **Reversible:** `remove` command deletes only this file
+- ✅ **Standard:** Follows Debian/Ubuntu APT configuration best practices
+
+**Important:** Your apt-cacher-ng server must have HTTPS pass-through enabled. Add to `/etc/apt-cacher-ng/acng.conf`:
+
+```bash
+PassThroughPattern: .*
+```
+
+Then restart: `systemctl restart apt-cacher-ng`
+
 ## Configuration
 
 **IMPORTANT:** Before using the script, you must edit `/usr/local/bin/connect-to-apt-cache.sh` and customize the configuration variables at the top:
@@ -161,4 +204,7 @@ Contributions are welcome! Please feel free to submit a pull request or open an 
 
 ## Contact
 
-For any questions or feedback, please reach out to <grandday@cue-verse.quest>.t> .
+For questions or feedback, please:
+
+- Open an issue: <https://github.com/GrandDay/apt-cache-config/issues>
+- Email: <grandday@cue-verse.quest>t> .

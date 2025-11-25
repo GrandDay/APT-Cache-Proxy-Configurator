@@ -1,0 +1,25 @@
+name: ShellCheck
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  shellcheck:
+    name: Shellcheck
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run ShellCheck
+        uses: ludeeus/action-shellcheck@master
+        with:
+          scandir: './src'
+          additional_files: './install-interactive.sh ./install.sh'
+          severity: 'warning'
+          format: 'gcc'
+        env:
+          SHELLCHECK_OPTS: -e SC2181 -e SC2086  # Allow some common patterns
